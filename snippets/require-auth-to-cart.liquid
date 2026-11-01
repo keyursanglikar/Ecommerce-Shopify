@@ -1,0 +1,27 @@
+{% unless customer %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Intercept clicks on Add to Cart buttons and forms for guest users
+      function interceptAddToCart(e) {
+        const atcBtn = e.target.closest(
+          '.pz-atc__btn, .product-form__submit, button[name="add"], .btn-custom-add-to-cart, form[action*="/cart/add"] button[type="submit"]'
+        );
+
+        if (atcBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+
+          // Store current page to redirect back after login
+          sessionStorage.setItem('pz_return_after_login', window.location.href);
+
+          // Alert user gently and navigate to login/register page
+          window.location.href = '/account/login?return_to=' + encodeURIComponent(window.location.pathname);
+        }
+      }
+
+      // Capture click events in capturing phase before theme scripts fire
+      document.addEventListener('click', interceptAddToCart, true);
+    });
+  </script>
+{% endunless %}
