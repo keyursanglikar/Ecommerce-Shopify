@@ -1,0 +1,58 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="customer register page-width" style="max-width: 520px; margin: 4rem auto; padding: 0 1.5rem; font-family: 'Barlow', system-ui, sans-serif;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.5rem 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.06); text-align: left;">
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span style="font-size: 0.8rem; font-weight: 800; color: #ef4444; letter-spacing: 0.1em; text-transform: uppercase;">VIP Membership</span>
+      <h1 style="font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin: 0.25rem 0 0.5rem; letter-spacing: -0.01em;">Create Account</h1>
+      <p style="color: #64748b; font-size: 0.95rem; margin: 0; line-height: 1.5;">Join 5,00,000+ happy rooms. Unlock secret artwork drops and priority delivery.</p>
+    </div>
+
+    {% form 'create_customer' %}
+      {% if form.errors %}
+        <div style="background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 12px 14px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.25rem;">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
+      <div style="display: flex; gap: 12px; margin-bottom: 1.25rem;">
+        <div style="flex: 1;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">First Name</label>
+          <input type="text" name="customer[first_name]" id="RegisterFirstName" placeholder="First name" required autocomplete="given-name" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+        </div>
+        <div style="flex: 1;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Last Name</label>
+          <input type="text" name="customer[last_name]" id="RegisterLastName" placeholder="Last name" autocomplete="family-name" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Email Address</label>
+        <input type="email" name="customer[email]" id="RegisterEmail" placeholder="name@example.com" required autocomplete="email" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Password</label>
+        <input type="password" name="customer[password]" id="RegisterPassword" placeholder="Create password (min 6 characters)" required autocomplete="new-password" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+      </div>
+
+      <button type="submit" style="width: 100%; height: 48px; background: #000; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: background 0.15s;">
+        Create Account &rarr;
+      </button>
+    {% endform %}
+
+    <div style="text-align: center; margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid #f1f5f9; font-size: 0.9rem; color: #64748b;">
+      Already have an account? 
+      <a href="/account/login" style="color: #000; font-weight: 800; text-decoration: underline; margin-left: 4px;">Sign In</a>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Register Page",
+  "settings": []
+}
+{% endschema %}

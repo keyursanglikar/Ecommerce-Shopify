@@ -1,0 +1,97 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="customer login page-width" style="max-width: 480px; margin: 4rem auto; padding: 0 1.5rem; font-family: 'Barlow', system-ui, sans-serif;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.5rem 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.06); text-align: left;">
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span style="font-size: 0.8rem; font-weight: 800; color: #ef4444; letter-spacing: 0.1em; text-transform: uppercase;">Customer Portal</span>
+      <h1 style="font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin: 0.25rem 0 0.5rem; letter-spacing: -0.01em;">Sign In</h1>
+      <p style="color: #64748b; font-size: 0.95rem; margin: 0; line-height: 1.5;">Log in to track your orders, view saved items, and claim VIP discounts.</p>
+    </div>
+
+    <!-- Password Recovery Block -->
+    <div id="recover" style="display: none; margin-bottom: 2rem;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; text-transform: uppercase; margin: 0 0 0.5rem;">Reset your password</h2>
+      <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1.25rem;">We will send you an email to reset your password.</p>
+      
+      {% form 'recover_customer_password' %}
+        {% assign recover_success = form.posted_successfully? %}
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Email Address</label>
+          <input type="email" name="email" id="RecoverEmail" placeholder="name@example.com" required style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+        </div>
+
+        <button type="submit" style="width: 100%; height: 48px; background: #000; color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-top: 0.5rem;">
+          Submit &rarr;
+        </button>
+
+        <div style="text-align: center; margin-top: 1rem;">
+          <a href="#login" onclick="hideRecoverPasswordForm(); return false;" style="font-size: 0.85rem; color: #64748b; text-decoration: underline;">Cancel</a>
+        </div>
+      {% endform %}
+    </div>
+
+    <!-- Main Login Form -->
+    <div id="login">
+      {% form 'customer_login' %}
+        {% if form.errors %}
+          <div style="background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 12px 14px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.25rem;">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        {% if recover_success == true %}
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; padding: 12px 14px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.25rem;">
+            We've sent you an email with a link to update your password.
+          </div>
+        {% endif %}
+
+        <div style="margin-bottom: 1.25rem;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Email Address</label>
+          <input type="email" name="customer[email]" id="CustomerEmail" placeholder="name@example.com" required autocomplete="email" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+            <label style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #1e293b; margin: 0;">Password</label>
+            <a href="#recover" onclick="showRecoverPasswordForm(); return false;" style="font-size: 0.8rem; color: #64748b; text-decoration: underline;">Forgot password?</a>
+          </div>
+          <input type="password" name="customer[password]" id="CustomerPassword" placeholder="Enter password" required autocomplete="current-password" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+        </div>
+
+        <button type="submit" style="width: 100%; height: 48px; background: #000; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: background 0.15s;">
+          Sign In &rarr;
+        </button>
+      {% endform %}
+
+      <div style="text-align: center; margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid #f1f5f9; font-size: 0.9rem; color: #64748b;">
+        New to Posterized? 
+        <a href="/account/register" style="color: #000; font-weight: 800; text-decoration: underline; margin-left: 4px;">Create an account</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showRecoverPasswordForm() {
+    document.getElementById('recover').style.display = 'block';
+    document.getElementById('login').style.display = 'none';
+  }
+
+  function hideRecoverPasswordForm() {
+    document.getElementById('recover').style.display = 'none';
+    document.getElementById('login').style.display = 'block';
+  }
+
+  if (window.location.hash === '#recover') {
+    showRecoverPasswordForm();
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Customer Login Page",
+  "settings": []
+}
+{% endschema %}
