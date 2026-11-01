@@ -1,12 +1,12 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
-<div class="customer register page-width" style="max-width: 520px; margin: 4rem auto; padding: 0 1.5rem; font-family: 'Barlow', system-ui, sans-serif;">
+<div class="customer register page-width" style="max-width: 600px; margin: 3.5rem auto; padding: 0 1.5rem; font-family: 'Barlow', system-ui, sans-serif;">
   <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.5rem 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.06); text-align: left;">
     
     <div style="text-align: center; margin-bottom: 2rem;">
-      <span style="font-size: 0.8rem; font-weight: 800; color: #ef4444; letter-spacing: 0.1em; text-transform: uppercase;">VIP Membership</span>
+      <span style="font-size: 0.8rem; font-weight: 800; color: #ef4444; letter-spacing: 0.1em; text-transform: uppercase;">Join 5,00,000+ Happy Rooms</span>
       <h1 style="font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin: 0.25rem 0 0.5rem; letter-spacing: -0.01em;">Create Account</h1>
-      <p style="color: #64748b; font-size: 0.95rem; margin: 0; line-height: 1.5;">Join 5,00,000+ happy rooms. Unlock secret artwork drops and priority delivery.</p>
+      <p style="color: #64748b; font-size: 0.95rem; margin: 0; line-height: 1.5;">Enter your delivery and contact details to unlock VIP discounts and live order tracking.</p>
     </div>
 
     {% form 'create_customer' %}
@@ -16,29 +16,54 @@
         </div>
       {% endif %}
 
+      <!-- Name Fields -->
       <div style="display: flex; gap: 12px; margin-bottom: 1.25rem;">
         <div style="flex: 1;">
-          <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">First Name</label>
-          <input type="text" name="customer[first_name]" id="RegisterFirstName" placeholder="First name" required autocomplete="given-name" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">First Name *</label>
+          <input type="text" name="customer[first_name]" id="RegisterFirstName" placeholder="e.g. Rahul" required autocomplete="given-name" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
         </div>
         <div style="flex: 1;">
-          <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Last Name</label>
-          <input type="text" name="customer[last_name]" id="RegisterLastName" placeholder="Last name" autocomplete="family-name" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Last Name *</label>
+          <input type="text" name="customer[last_name]" id="RegisterLastName" placeholder="e.g. Sharma" required autocomplete="family-name" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
         </div>
       </div>
 
+      <!-- Contact Info -->
       <div style="margin-bottom: 1.25rem;">
-        <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Email Address</label>
+        <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Email Address *</label>
         <input type="email" name="customer[email]" id="RegisterEmail" placeholder="name@example.com" required autocomplete="email" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
       </div>
 
-      <div style="margin-bottom: 1.5rem;">
-        <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Password</label>
-        <input type="password" name="customer[password]" id="RegisterPassword" placeholder="Create password (min 6 characters)" required autocomplete="new-password" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+      <div style="margin-bottom: 1.25rem;">
+        <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Mobile Phone Number (For Courier Updates) *</label>
+        <input type="tel" name="customer[note][Phone Number]" id="RegisterPhone" placeholder="e.g. +91 9876543210" required style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
       </div>
 
-      <button type="submit" style="width: 100%; height: 48px; background: #000; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: background 0.15s;">
-        Create Account &rarr;
+      <!-- Shipping Address Details -->
+      <div style="margin-bottom: 1.25rem;">
+        <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Delivery Street Address</label>
+        <input type="text" name="customer[note][Address]" id="RegisterAddress" placeholder="House/Flat No., Building, Street area" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+      </div>
+
+      <div style="display: flex; gap: 12px; margin-bottom: 1.25rem;">
+        <div style="flex: 1;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">City</label>
+          <input type="text" name="customer[note][City]" id="RegisterCity" placeholder="City" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+        </div>
+        <div style="flex: 1;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">PIN Code</label>
+          <input type="text" name="customer[note][Pincode]" id="RegisterPincode" placeholder="6-digit PIN code" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div style="margin-bottom: 1.75rem;">
+        <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: #1e293b;">Create Password *</label>
+        <input type="password" name="customer[password]" id="RegisterPassword" placeholder="Minimum 6 characters" required autocomplete="new-password" style="width: 100%; height: 46px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 14px; font-size: 0.95rem; outline: none;">
+      </div>
+
+      <button type="submit" style="width: 100%; height: 50px; background: #000; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: background 0.15s;">
+        Save &amp; Complete Registration &rarr;
       </button>
     {% endform %}
 
