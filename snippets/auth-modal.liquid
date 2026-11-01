@@ -258,6 +258,7 @@
     if (modal) {
       modal.classList.remove('is-open');
       document.body.style.overflow = '';
+      sessionStorage.setItem('pz_auth_dismissed', 'true');
     }
   }
 
@@ -281,7 +282,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    // Attach to account icon triggers in navbar
+    // 1. Attach to manual click triggers in navbar
     const accountButtons = document.querySelectorAll('.pz-account-btn, a[href*="/account/login"]');
     accountButtons.forEach(btn => {
       {% unless customer %}
@@ -291,5 +292,19 @@
         });
       {% endunless %}
     });
+
+    // 2. Automated Welcome Pop-up (Triggers after 5 seconds for new visitors)
+    {% unless customer %}
+      const isDismissed = sessionStorage.getItem('pz_auth_dismissed');
+      if (!isDismissed) {
+        setTimeout(function() {
+          const modal = document.getElementById('pzAuthModal');
+          // Only show if user hasn't already opened another modal
+          if (modal && !modal.classList.contains('is-open')) {
+            openAuthModal('register'); // Opens with VIP Club / Register tab first
+          }
+        }, 5000);
+      }
+    {% endunless %}
   });
 </script>
