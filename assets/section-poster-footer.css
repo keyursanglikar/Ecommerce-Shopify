@@ -1,0 +1,236 @@
+.pz-footer {
+  background-color: #0b0c10;
+  color: #e2e8f0;
+  font-family: 'Barlow', system-ui, sans-serif;
+  padding: 40px 0 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pz-footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Help Pill */
+.pz-footer-help-pill {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+}
+.pz-footer-help-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+.pz-footer-help-pill .gold-text {
+  color: #f5c542;
+}
+
+/* 4-Column Grid */
+.pz-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+@media (min-width: 640px) {
+  .pz-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .pz-footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  }
+}
+
+.pz-footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.pz-footer-logo {
+  font-family: 'Barlow Condensed', Barlow, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+.pz-footer-logo span {
+  color: #ef4444;
+}
+
+.pz-footer-tagline {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0 0 16px 0;
+}
+
+.pz-footer-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.spec-badge {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.pz-footer-heading {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.pz-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pz-footer-links li a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: color 0.15s ease, padding-left 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pz-footer-links li a:hover {
+  color: #ffffff;
+  padding-left: 4px;
+}
+.hot-badge {
+  background: #ef4444;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.pz-footer-sub {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0 0 12px 0;
+}
+
+.pz-input-row {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pz-email-input {
+  background: transparent;
+  border: none;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-size: 13px;
+  flex: 1;
+  outline: none;
+}
+.pz-email-input::placeholder {
+  color: #64748b;
+}
+.pz-newsletter-btn {
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pz-newsletter-btn:hover {
+  background: #f5c542;
+}
+
+.pz-footer-contact {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: #94a3b8;
+}
+.pz-footer-contact a {
+  color: #f5c542;
+  text-decoration: underline;
+}
+
+/* Legal Fan Art Box */
+.pz-footer-disclaimer {
+  background-color: #d32f2f;
+  color: #ffffff;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  border-radius: 8px;
+}
+.pz-footer-disclaimer a {
+  color: #ffebee;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Bottom Strip */
+.pz-footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 20px;
+  font-size: 12px;
+  color: #64748b;
+}
+@media (min-width: 768px) {
+  .pz-footer-bottom {
+    flex-direction: row;
+  }
+}
+
+.pz-footer-payment-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+.pay-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #cbd5e1;
+}
