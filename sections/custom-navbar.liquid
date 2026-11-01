@@ -1,0 +1,187 @@
+{{ 'section-poster-navbar.css' | asset_url | stylesheet_tag }}
+
+<div class="pz-navbar-wrapper" data-section-id="{{ section.id }}">
+  <!-- Top Offer Bar -->
+  {% if section.settings.show_top_bar %}
+    <div class="pz-top-bar" style="background-color: {{ section.settings.top_bar_bg }}; color: {{ section.settings.top_bar_text }};">
+      <div class="pz-top-bar-marquee">
+        <div class="pz-top-bar-track">
+          <span>🔥 <strong>BUY 4 GET 3 FREE</strong> (AUTO APPLIED AT CHECKOUT)</span>
+          <span>•</span>
+          <span>🚀 <strong>FREE DELIVERY</strong> ON ALL PREPAID UPI ORDERS</span>
+          <span>•</span>
+          <span>✨ <strong>300 GSM PREMIUM MATTE</strong> FINISH WITH FREE WALL TAPE</span>
+          <span>•</span>
+          <span>⚡ <strong>BUY 5 GET 5 FREE</strong> ON ALL SINGLE POSTERS</span>
+          <span>•</span>
+          <span>🔥 <strong>BUY 4 GET 3 FREE</strong> (AUTO APPLIED AT CHECKOUT)</span>
+          <span>•</span>
+          <span>🚀 <strong>FREE DELIVERY</strong> ON ALL PREPAID UPI ORDERS</span>
+          <span>•</span>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Main Navbar -->
+  <header class="pz-navbar page-width">
+    <!-- Left: Mobile Menu Toggle / Desktop Brand -->
+    <div class="pz-nav-left">
+      <button type="button" class="pz-menu-toggle" aria-label="Toggle navigation" onclick="togglePzDrawer()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <a href="/" class="pz-logo-link">
+        {% if section.settings.logo != blank %}
+          <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="pz-logo-img">
+        {% else %}
+          <span class="pz-logo-text">{{ section.settings.logo_text | default: "POSTERIZED" }}<span class="dot">.</span></span>
+        {% endif %}
+      </a>
+    </div>
+
+    <!-- Center: Desktop Links with Posterized Categories -->
+    <nav class="pz-nav-center">
+      <ul class="pz-nav-links">
+        <li class="pz-nav-item">
+          <a href="/collections/all" class="pz-link">Wall Posters</a>
+        </li>
+        <li class="pz-nav-item">
+          <a href="/collections" class="pz-link">Wall Setup Packs <span class="nav-badge">HOT</span></a>
+        </li>
+        <li class="pz-nav-item has-dropdown">
+          <a href="#" class="pz-link">Split Posters <span class="caret">▾</span></a>
+          <ul class="pz-dropdown">
+            <li><a href="/collections">3-Piece Split Posters</a></li>
+            <li><a href="/collections">4-Piece Split Posters</a></li>
+            <li><a href="/collections">5-Piece Split Posters</a></li>
+            <li><a href="/collections">8-Piece Split Sets</a></li>
+          </ul>
+        </li>
+        <li class="pz-nav-item has-dropdown">
+          <a href="#" class="pz-link">Custom Prints <span class="caret">▾</span></a>
+          <ul class="pz-dropdown">
+            <li><a href="/products">Custom Photo Posters</a></li>
+            <li><a href="/products">Retro Prints</a></li>
+            <li><a href="/products">Mini Pocket Photos</a></li>
+            <li><a href="/products">Photobooth Strips</a></li>
+          </ul>
+        </li>
+        <li class="pz-nav-item">
+          <a href="/pages/contact" class="pz-link">Track Order</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Right: Search, Account, Cart Drawer trigger -->
+    <div class="pz-nav-right">
+      <a href="/search" class="pz-icon-btn" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+
+      <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="pz-icon-btn pz-account-btn" aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+
+      <a href="/cart" class="pz-icon-btn pz-cart-btn" id="pzCartTrigger" aria-label="Cart">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="pz-cart-count" id="pzCartCount">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="pz-mobile-drawer" id="pzMobileDrawer">
+    <div class="pz-drawer-overlay" onclick="togglePzDrawer()"></div>
+    <div class="pz-drawer-content">
+      <div class="pz-drawer-header">
+        <span class="pz-drawer-title">Menu</span>
+        <button type="button" class="pz-drawer-close" onclick="togglePzDrawer()">&times;</button>
+      </div>
+      <ul class="pz-drawer-links">
+        <li><a href="/collections/all">🖼️ All Wall Posters</a></li>
+        <li><a href="/collections">📦 Wall Setup Packs <span class="nav-badge">HOT</span></a></li>
+        <li><a href="/products">🎨 Custom Photo Wall Poster</a></li>
+        <li><a href="/collections">⚡ Split Wall Art (3, 4, 8 Piece)</a></li>
+        <li><a href="/collections">🏎️ Cars & Formula 1</a></li>
+        <li><a href="/collections">🎌 Anime & Manga</a></li>
+        <li><a href="/collections">🎮 Gaming Aesthetic</a></li>
+        <li><a href="/collections">💪 Gym & Quotes</a></li>
+        <li class="drawer-divider"></li>
+        <li><a href="/pages/contact">📦 Track Your Order</a></li>
+        <li><a href="/pages/contact">💬 Help & Support</a></li>
+      </ul>
+      <div class="pz-drawer-footer">
+        <div class="pz-drawer-trust">
+          <span>✨ 300 GSM Matte Paper</span>
+          <span>💧 Fade-proof HD Inks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function togglePzDrawer() {
+    const drawer = document.getElementById('pzMobileDrawer');
+    if (drawer) {
+      drawer.classList.toggle('active');
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Posterized Custom Navbar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_top_bar",
+      "label": "Show Announcement Marquee Bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "top_bar_bg",
+      "label": "Top Bar Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_text",
+      "label": "Top Bar Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text (Fallback)",
+      "default": "POSTERIZED"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Posterized Custom Navbar"
+    }
+  ]
+}
+{% endschema %}

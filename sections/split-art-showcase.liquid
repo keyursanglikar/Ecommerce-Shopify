@@ -1,0 +1,288 @@
+<div class="split-sets-wrapper page-width" style="margin-top: 3rem; margin-bottom: 3rem;">
+  <div class="split-sets-header">
+    <div>
+      <span class="split-sets-tag">{{ section.settings.badge | default: "MULTI-PANEL ART" }}</span>
+      <h2 class="split-sets-title">{{ section.settings.title | default: "Split Wall Art Sets" }}</h2>
+      <p class="split-sets-subtitle">{{ section.settings.subtitle | default: "Transform your empty walls with our 3-Piece, 4-Piece, and 8-Piece split layouts." }}</p>
+    </div>
+    {% if section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="split-sets-view-all">
+        {{ section.settings.button_text | default: "View All Split Sets →" }}
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="split-sets-grid">
+    {% for block in section.blocks %}
+      <div class="split-card" {{ block.shopify_attributes }}>
+        <div class="split-card-preview">
+          <div class="split-panels split-panels--{{ block.settings.panels_count }}">
+            {% for i in (1..block.settings.panels_count) %}
+              <div class="split-panel-slice"></div>
+            {% endfor %}
+          </div>
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title }}" class="split-bg-image" loading="lazy">
+          {% else %}
+            <div class="split-card-fallback" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+              <span>{{ block.settings.panels_count }} PIECE SPLIT</span>
+            </div>
+          {% endif %}
+          <span class="split-card-chip">{{ block.settings.panels_count }} Pieces</span>
+        </div>
+        <div class="split-card-content">
+          <h3 class="split-card-title">{{ block.settings.title }}</h3>
+          <p class="split-card-dim">{{ block.settings.dimensions | default: "Combined size: 36 x 24 inches" }}</p>
+          <div class="split-card-footer">
+            <span class="split-card-price">{{ block.settings.price | default: "₹699" }}</span>
+            <a href="{{ block.settings.link | default: '#' }}" class="split-card-btn">Shop Set</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .split-sets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .split-sets-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #ef4444;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .split-sets-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .split-sets-subtitle {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: 0.25rem 0 0 0;
+  }
+  .split-sets-view-all {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    color: #111;
+  }
+  .split-sets-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .split-sets-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .split-sets-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .split-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .split-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  }
+  .split-card-preview {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f172a;
+  }
+  .split-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .split-card-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+  .split-panels {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    gap: 4px;
+    padding: 12px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .split-panel-slice {
+    flex: 1;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+    border-radius: 3px;
+  }
+  .split-card-chip {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 3;
+    text-transform: uppercase;
+  }
+  .split-card-content {
+    padding: 1.25rem;
+  }
+  .split-card-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 0 0 0.25rem 0;
+  }
+  .split-card-dim {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0 0 1rem 0;
+  }
+  .split-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .split-card-price {
+    font-size: 1.25rem;
+    font-weight: 900;
+  }
+  .split-card-btn {
+    background: #000;
+    color: #fff;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .split-card-btn:hover {
+    opacity: 0.85;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Split Art Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Section Badge",
+      "default": "MULTI-PANEL ART"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Split Wall Art Sets"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Transform your room with 3-piece, 4-piece, and 8-piece poster splits."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "View All Splits →"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "split_set",
+      "name": "Split Art Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Formula 1 Monoposto Split Set"
+        },
+        {
+          "type": "range",
+          "id": "panels_count",
+          "min": 2,
+          "max": 8,
+          "step": 1,
+          "label": "Number of Panels",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "dimensions",
+          "label": "Dimensions Note",
+          "default": "Combined: 36 x 24 inches"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Display",
+          "default": "₹799"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Preview Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Wall Art Showcase",
+      "blocks": [
+        { "type": "split_set", "settings": { "title": "Formula 1 Circuit Split", "panels_count": 3, "price": "₹699" } },
+        { "type": "split_set", "settings": { "title": "Anime Domain Expansion Split", "panels_count": 4, "price": "₹899" } },
+        { "type": "split_set", "settings": { "title": "Tokyo City Skyline Split", "panels_count": 8, "price": "₹1,499" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

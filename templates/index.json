@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "pz_hero": {
+      "type": "pz_home_hero"
+    },
+    "pz_packs": {
+      "type": "pz_home_packs"
+    },
+    "pz_byw": {
+      "type": "pz_home_byw"
+    },
+    "pz_mm": {
+      "type": "pz_home_mm"
+    },
+    "pz_colhead": {
+      "type": "pz_home_colhead"
+    },
+    "pz_row_3pc": {
+      "type": "pz_home_row_3pc"
+    },
+    "pz_custom": {
+      "type": "pz_home_custom"
+    },
+    "pz_row_8pc": {
+      "type": "pz_home_row_8pc"
+    },
+    "pz_row_4pc": {
+      "type": "pz_home_row_4pc"
+    },
+    "pz_row_5pc": {
+      "type": "pz_home_row_5pc"
+    },
+    "pz_trust": {
+      "type": "pz_home_trust"
+    }
+  },
+  "order": [
+    "pz_hero",
+    "pz_packs",
+    "pz_byw",
+    "pz_mm",
+    "pz_colhead",
+    "pz_row_3pc",
+    "pz_custom",
+    "pz_row_8pc",
+    "pz_row_4pc",
+    "pz_row_5pc",
+    "pz_trust"
+  ]
+}

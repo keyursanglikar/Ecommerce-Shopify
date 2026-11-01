@@ -1,0 +1,37 @@
+{% comment %} Exact clone of pz_home_custom from posterized.in {% endcomment %}
+<link href="{{ 'pz-home.css' | asset_url }}" rel="stylesheet" type="text/css" media="all" />
+<section class="pz-home pz-home-custom">
+  <div class="wrap">
+    <div class="head"><div><p class="eyebrow">Your photos, printed</p><h2>Transform your memories into art</h2></div></div><style>
+      @media (max-width: 749px) {
+        .pz-home-custom .grid3.pz-row { display: flex; gap: 10px; overflow-x: auto; margin: 12px -16px 0; padding: 0 16px 4px;
+          scroll-snap-type: x mandatory; scroll-padding: 0 16px; scrollbar-width: none; }
+        .pz-home-custom .grid3.pz-row::-webkit-scrollbar { display: none; }
+        .pz-home-custom .grid3.pz-row .cg { flex: 0 0 150px; scroll-snap-align: start; }
+        .pz-home-custom .grid3.pz-row .cg .t { font-size: 13px; }
+      }
+    </style>
+    <div class="grid3 pz-row" style="--n:4"><a class="cg" href="/products/personalize-your-wall-space"><img src="//www.posterized.in/cdn/shop/files/custom_36a826e7-a7e6-4025-9e24-1cddaa3eb898.webp?v=1767176286&width=540" alt="Custom posters" loading="lazy" width="120" height="150"><div class="t">Custom posters</div>
+          <div class="p">from ₹99</div>
+        </a><a class="cg" href="/products/custom-retro-prints" ><img src="//www.posterized.in/cdn/shop/files/a6_0378f882-0c62-4116-83b8-90619198b73f.webp?v=1767173575&width=540" alt="Retro prints" loading="lazy" width="120" height="150"><div class="t">Retro prints</div>
+          <div class="p">10 for ₹179</div>
+        </a><a class="cg" href="/products/custom-pocket-prints" ><img src="//www.posterized.in/cdn/shop/files/pz-home-mini.jpg?v=1790657368&width=540" alt="Mini pocket photos" loading="lazy" width="120" height="150"><div class="t">Mini pocket photos</div>
+          <div class="p">5 for ₹99</div>
+        </a><a class="cg" href="/products/custom-photobooth-strip" ><img src="//www.posterized.in/cdn/shop/files/pz-home-strip.jpg?v=1790657368&width=540" alt="Photobooth strips" loading="lazy" width="120" height="150"><div class="t">Photobooth strips</div>
+          <div class="p">3 for ₹149</div>
+        </a></div>
+  </div>
+</section>
+
+</div>
+{% schema %}
+{
+  "name": "Pz Home Custom",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Pz Home Custom"
+    }
+  ]
+}
+{% endschema %}

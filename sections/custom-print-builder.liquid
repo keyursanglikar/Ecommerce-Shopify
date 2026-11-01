@@ -1,0 +1,304 @@
+<div class="custom-print-builder page-width" style="margin-top: 2rem; margin-bottom: 3rem;">
+  <div class="custom-print-grid">
+    <!-- Left: Preview & Upload Area -->
+    <div class="custom-print-preview-pane">
+      <div class="custom-print-mockup-frame" id="printMockupFrame">
+        <div class="frame-inner" id="frameInner">
+          <img id="customImagePreview" src="" alt="Custom Poster Preview" style="display: none;" />
+          <div class="upload-placeholder" id="uploadPlaceholder">
+            <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <p><strong>Click to upload your image</strong></p>
+            <span>Supports high-res PNG, JPG (Min 1080p recommended)</span>
+          </div>
+        </div>
+      </div>
+      <p class="custom-print-tip">💡 <em>Tip: For the sharpest 300 GSM print, use high-resolution Pinterest, wallpaper, or camera photos.</em></p>
+    </div>
+
+    <!-- Right: Options & Add to Cart -->
+    <div class="custom-print-details-pane">
+      <h1 class="custom-print-title">{{ section.settings.title | default: "Custom Photo Wall Poster" }}</h1>
+      <p class="custom-print-description">{{ section.settings.description | default: "Turn your favorite memories, artwork, anime panels, or Spotify album covers into high-grade 300 GSM matte art prints." }}</p>
+
+      {% form 'product', product, id: 'custom-poster-form', enctype: 'multipart/form-data' %}
+        <!-- Hidden variant ID -->
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="selectedVariantId">
+
+        <!-- File Upload Field linked directly to Line Item Properties -->
+        <div class="custom-field-group">
+          <label class="custom-field-label"><strong>1. Upload Artwork / Photo:</strong></label>
+          <div class="custom-file-input-wrapper">
+            <input type="file" id="customPosterFileInput" name="properties[Uploaded Image]" accept="image/*" required class="custom-file-input" />
+          </div>
+        </div>
+
+        <!-- Optional Custom Caption -->
+        <div class="custom-field-group">
+          <label class="custom-field-label"><strong>2. Add Custom Caption or Song Name (Optional):</strong></label>
+          <input type="text" name="properties[Custom Caption]" placeholder="e.g. 'Starboy - The Weeknd' or 'Tokyo, 2024'" class="custom-text-input">
+        </div>
+
+        <!-- Size Selection -->
+        <div class="custom-field-group">
+          <label class="custom-field-label"><strong>3. Choose Size:</strong></label>
+          <div class="size-swatches">
+            <label class="size-swatch active">
+              <input type="radio" name="size_option" value="A4" checked>
+              <div class="swatch-content">
+                <span class="swatch-name">A4</span>
+                <span class="swatch-dims">8.3 × 11.7 in</span>
+              </div>
+            </label>
+            <label class="size-swatch">
+              <input type="radio" name="size_option" value="A3">
+              <div class="swatch-content">
+                <span class="swatch-name">A3</span>
+                <span class="swatch-dims">11.7 × 16.5 in</span>
+              </div>
+            </label>
+            <label class="size-swatch">
+              <input type="radio" name="size_option" value="12x18">
+              <div class="swatch-content">
+                <span class="swatch-name">12 × 18</span>
+                <span class="swatch-dims">Poster Size</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Quality Badges -->
+        <div class="poster-spec-box">
+          <div class="spec-item">✨ <strong>300 GSM</strong> Premium Matte Paper</div>
+          <div class="spec-item">💧 <strong>Fade-Proof</strong> Pigment Inks</div>
+          <div class="spec-item">📦 <strong>Free Tape</strong> Included (Ready to stick)</div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="custom-print-actions">
+          <button type="submit" name="add" class="btn-custom-add-to-cart">
+            ADD TO CART • <span id="customPosterPrice">{{ product.price | money }}</span>
+          </button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-print-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  @media (min-width: 768px) {
+    .custom-print-grid {
+      grid-template-columns: 1.1fr 1fr;
+      align-items: start;
+    }
+  }
+  .custom-print-mockup-frame {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    min-height: 440px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .frame-inner {
+    width: 100%;
+    max-width: 320px;
+    height: 420px;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border: 8px solid #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  #customImagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .upload-placeholder {
+    text-align: center;
+    color: #64748b;
+    padding: 1.5rem;
+  }
+  .upload-placeholder span {
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 4px;
+  }
+  .custom-print-tip {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+  .custom-print-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+  }
+  .custom-print-description {
+    color: #4b5563;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .custom-field-group {
+    margin-bottom: 1.25rem;
+  }
+  .custom-field-label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  .custom-file-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+  }
+  .custom-text-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .size-swatches {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .size-swatch {
+    flex: 1;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .size-swatch input {
+    display: none;
+  }
+  .size-swatch.active {
+    border-color: #000;
+    background: #f9fafb;
+  }
+  .swatch-name {
+    display: block;
+    font-weight: 800;
+    font-size: 1rem;
+  }
+  .swatch-dims {
+    display: block;
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+  .poster-spec-box {
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin: 1.5rem 0;
+  }
+  .btn-custom-add-to-cart {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.2s ease;
+  }
+  .btn-custom-add-to-cart:hover {
+    background: #333;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('customPosterFileInput');
+    const preview = document.getElementById('customImagePreview');
+    const placeholder = document.getElementById('uploadPlaceholder');
+    const frame = document.getElementById('printMockupFrame');
+
+    if (frame && fileInput) {
+      frame.addEventListener('click', function(e) {
+        if (e.target !== fileInput) {
+          fileInput.click();
+        }
+      });
+    }
+
+    if (fileInput) {
+      fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            if (placeholder) placeholder.style.display = 'none';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    const swatches = document.querySelectorAll('.size-swatch');
+    swatches.forEach(swatch => {
+      swatch.addEventListener('click', function() {
+        swatches.forEach(s => s.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Print Builder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Custom Photo Wall Poster"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Upload any picture and get it printed on high-density 300 GSM matte cardstock with pre-applied wall tape."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Print Builder"
+    }
+  ]
+}
+{% endschema %}

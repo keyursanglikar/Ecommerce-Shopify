@@ -1,0 +1,81 @@
+{% if template contains 'product' %}
+  <div class="poster-sticky-mobile-bar" id="posterStickyMobileBar">
+    <div class="sticky-bar-inner">
+      <div class="sticky-bar-info">
+        <span class="sticky-product-title">{{ product.title | truncate: 25 }}</span>
+        <span class="sticky-product-price">{{ product.price | money }}</span>
+      </div>
+      <button type="button" class="btn-sticky-buy" onclick="triggerMainAddToCart()">
+        BUY NOW
+      </button>
+    </div>
+  </div>
+
+  <style>
+    .poster-sticky-mobile-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #e5e7eb;
+      padding: 10px 16px;
+      z-index: 999;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .poster-sticky-mobile-bar {
+        display: block;
+      }
+    }
+    .sticky-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .sticky-bar-info {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sticky-product-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #111;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .sticky-product-price {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #000;
+    }
+    .btn-sticky-buy {
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+  </style>
+
+  <script>
+    function triggerMainAddToCart() {
+      const mainFormBtn = document.querySelector('form[action*="/cart/add"] button[type="submit"], .product-form__submit');
+      if (mainFormBtn) {
+        mainFormBtn.click();
+      }
+    }
+  </script>
+{% endif %}

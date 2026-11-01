@@ -1,0 +1,118 @@
+<div class="poster-offer-marquee-wrapper" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="poster-offer-marquee">
+    <div class="poster-offer-track">
+      {% for i in (1..4) %}
+        {% for block in section.blocks %}
+          <div class="poster-offer-item" {{ block.shopify_attributes }}>
+            <span class="poster-offer-icon">{{ block.settings.icon }}</span>
+            <span class="poster-offer-text"><strong>{{ block.settings.title }}</strong> {{ block.settings.subtitle }}</span>
+            <span class="poster-offer-divider">•</span>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .poster-offer-marquee-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .poster-offer-marquee {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    user-select: none;
+  }
+  .poster-offer-track {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 1.5rem;
+    animation: marqueeScroll 25s linear infinite;
+  }
+  .poster-offer-track:hover {
+    animation-play-state: paused;
+  }
+  .poster-offer-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .poster-offer-divider {
+    margin-left: 1.5rem;
+    opacity: 0.4;
+  }
+  @keyframes marqueeScroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Offer Marquee Ticker",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Deal / Offer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji / Icon",
+          "default": "🔥"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Headline",
+          "default": "BUY 4 GET 3 FREE"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "(Add 7 items - discount applied automatically)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Posterized Offer Ticker",
+      "blocks": [
+        { "type": "announcement", "settings": { "icon": "🔥", "title": "BUY 4 GET 3 FREE", "subtitle": "Auto applied at checkout" } },
+        { "type": "announcement", "settings": { "icon": "🚀", "title": "FREE DELIVERY", "subtitle": "On all prepaid orders" } },
+        { "type": "announcement", "settings": { "icon": "⚡", "title": "BUY 5 GET 5 FREE", "subtitle": "Double your wall collection" } },
+        { "type": "announcement", "settings": { "icon": "🎨", "title": "300 GSM PREMIUM MATTE", "subtitle": "Ready-to-stick wall decor" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
